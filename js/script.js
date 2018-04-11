@@ -66,18 +66,19 @@ function loadData() {
         });
     
     //wikipedia query
-    var wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + address + '&format=json&callback=wikiCallback';
+    var wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + citystr + '&format=json&callback=wikiCallback';
+
     console.log(wikiURL);
     $.ajax({
         url:wikiURL,
         dataType: "jsonp",
         success: function (response) {
-            var articleList = repsonse[1];
+            var articleList = response[1];
 
             for ( var i = 0; i < articleList.length; i++) {
                   var wikiArticle = response[i];
                   var linkURL = "http://en.wikikpedia.org/wiki/" + wikiArticle;
-                  $wikiElem.append('<li><a href="'+ linkURL +'"> '+ wikiArticle +' </a></li>');
+                  $wikiElem.append('<li><a href="'+ linkURL +'">'+ wikiArticle +'</a></li>');
             };
 
         }
